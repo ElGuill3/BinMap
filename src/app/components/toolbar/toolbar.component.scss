@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'Tuna';
+    src: url('../../../assets/fonts/Ligature\ Inc\ -\ Tuna-MediumItalic.otf');
+    font-display: swap;
+}
+
+ion-toolbar {
+    --background: linear-gradient(#062E36, #0D4550);
+    --color: #fff;
+
+    ion-title {
+        font-family: 'Tuna';
+        font-size: xx-large;
+    }
+}
+
+ion-button {
+    padding: 0.5em;
+}

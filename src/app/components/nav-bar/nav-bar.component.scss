@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'source-sans-pro';
+    src: url('../../../assets/fonts/SourceSansPro-Regular.otf');
+    font-display: swap;
+}
+
+ion-tab-bar {
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
+    border: none;
+}
+
+ion-tab-button {
+    --color: #4D4D4D;
+    --color-selected: #059FAE;
+    --ripple-color: rgba(71, 159, 174, 0.8);
+    font-family: 'source-sans-pro';
+    font-weight: bold;
+    
+    transition: all 0.3s ease;
+}
+
+ion-tab-button.tab-selected mat-icon {
+    background: linear-gradient(#059FAE, #047B88);
+    background-clip: text;
+    --webkit-background-clip: text;
+    color: transparent;
+} 
