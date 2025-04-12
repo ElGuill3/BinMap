@@ -1,8 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>BinMap</ion-title>
-    <ion-buttons slot="end">
-      <ion-button>
+
+    <ion-buttons slot="start" *ngIf="showBackButton">
+      <ion-back-button defaultHref = '/' (click) = 'goBack()'></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>{{ title }}</ion-title>
+
+    <ion-buttons slot="end" *ngIf="!showBackButton">
+      <ion-button [routerLink] = "['/profile']">
         <ion-avatar>
           <img src="../../../assets/icon/default-avatar.svg" alt="default-avatar-img">
         </ion-avatar>
