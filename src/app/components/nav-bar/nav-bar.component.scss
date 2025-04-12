@@ -7,6 +7,7 @@
 ion-tab-bar {
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
     border: none;
+    height: 9vh;
 }
 
 ion-tab-button {
@@ -19,9 +20,13 @@ ion-tab-button {
     transition: all 0.3s ease;
 }
 
-ion-tab-button.tab-selected mat-icon {
-    background: linear-gradient(#059FAE, #047B88);
-    background-clip: text;
-    --webkit-background-clip: text;
-    color: transparent;
-} 
+mat-icon {
+    font-size: 2.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+ion-tab-button.tab-selected {
+    transform: scale(1.2);
+}
+
