@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-import { HomePage } from './home/home.page';
 
 export const routes: Routes = [
   {
@@ -14,7 +13,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
+        loadComponent: () => import('./pages/home/home.page').then((m) => m.HomePage),
       },
       {
         path: 'routes',
@@ -37,5 +36,9 @@ export const routes: Routes = [
   {
     path: 'profile',
     loadComponent: () => import('./pages/profile/profile.page').then( m => m.ProfilePage)
+  },
+  {
+    path: 'edit-user',
+    loadComponent: () => import('./pages/edit-user/edit-user.page').then( m => m.EditUserPage)
   }
 ];

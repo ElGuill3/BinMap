@@ -10,7 +10,7 @@
     <ion-buttons slot="end" *ngIf="!showBackButton">
       <ion-button [routerLink] = "['/profile']">
         <ion-avatar>
-          <img src="../../../assets/icon/default-avatar.svg" alt="default-avatar-img">
+          <img [src]="user.avatar || ''" alt="default-avatar-img">
         </ion-avatar>
       </ion-button>
     </ion-buttons>

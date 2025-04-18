@@ -1,13 +1,21 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="user-info">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+  <div class="user-avatar">
+    <ion-avatar>
+      <img [src]="user.avatar || '../../../assets/icon/default-avatar.svg'" />
+    </ion-avatar>
+    <h2>{{ user.name }}</h2>
+  </div>
+  
+  <div class="description">
+    <h3>Sobre Mi</h3>
+    <p>{{ user.description }}</p>
+  </div>
+
+</div>
+
+<div class="button-container">
+  <ion-button [routerLink] = "['/edit-user']" >
+    Editar Informacion
+  </ion-button>
+</div>

@@ -1,0 +1,35 @@
+<div class="user-info">
+
+  <div class="user-avatar">
+    <ion-avatar>
+      <img [src] = "form.value.avatar || '../../../assets/icon/default-avatar.svg'"/>
+    </ion-avatar>
+  </div>
+
+  <div class="button-container">
+    <ion-button (click)="openCamera()">
+      Cambiar foto
+    </ion-button>
+  </div>
+  
+  <div class="user-edit-info">
+    <form [formGroup] = "form" (ngSubmit) = "save()">
+
+      <ion-item>
+        <ion-label position = 'stacked'>Nombre</ion-label>
+        <ion-input formControlName = 'name' placeholder = "Ingresa tu nombre"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position = 'stacked'>Descripción</ion-label>
+        <ion-input formControlName = 'description' placeholder = "Escribe algo sobre ti..."></ion-input>
+      </ion-item>
+
+      <div class="save-button">
+        <ion-button expand = 'block' type = 'submit'>Guardar</ion-button>
+      </div>
+
+    </form>
+  </div>
+
+</div>

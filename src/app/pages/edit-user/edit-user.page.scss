@@ -18,19 +18,24 @@
     }
 }
 
-.user-info .description {
-    margin-top: 3vh;
-    background-color: #fff;
-    border-radius: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    text-align: justify;
-    padding: 0.1rem 1.5rem;
-}
-
 .button-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+
+    ion-button {
+        --background: #0D4550;
+    }
+}
+
+.user-edit-info {
+    margin: 2rem 0;
+}
+
+.save-button {
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
 
     ion-button {
         --background: #0D4550;
