@@ -1,35 +1,49 @@
 <div class="user-info">
-
   <div class="user-avatar">
     <ion-avatar>
-      <img [src] = "form.value.avatar || '../../../assets/icon/default-avatar.svg'"/>
+      <img
+        [src]="form.value.avatar || '../../../assets/icon/default-avatar.svg'"
+      />
     </ion-avatar>
   </div>
 
   <div class="button-container">
-    <ion-button (click)="openCamera()">
-      Cambiar foto
-    </ion-button>
+    <ion-button (click)="openCamera()"> Cambiar foto </ion-button>
   </div>
-  
+
   <div class="user-edit-info">
-    <form [formGroup] = "form" (ngSubmit) = "save()">
+    <form [formGroup]="form" (ngSubmit)="formSubmit()">
+      <h2>Nombre</h2>
 
-      <ion-item>
-        <ion-label position = 'stacked'>Nombre</ion-label>
-        <ion-input formControlName = 'name' placeholder = "Ingresa tu nombre"></ion-input>
-      </ion-item>
+      <ion-input
+        (ionInput)="onInputFilter($event, 'name')"
+        counter="50"
+        maxlength="50"
+        formControlName="name"
+        fill="outline"
+        autofocus="true"
+        placeholder="Ingresa tu nombre"
+        required="true"
+        errorText="El nombre es muy corto"
+        #input
+        #nameFilter
+      >
+      </ion-input>
 
-      <ion-item>
-        <ion-label position = 'stacked'>Descripción</ion-label>
-        <ion-input formControlName = 'description' placeholder = "Escribe algo sobre ti..."></ion-input>
-      </ion-item>
+      <h2>Sobre mi</h2>
+      <ion-textarea
+        (ionInput)="onInputFilter($event, 'description')"
+        counter="300"
+        maxlength="300"
+        formControlName="description"
+        fill="outline"
+        auto-grow="true"
+        placeholder="Escribe algo sobre ti..."
+      ></ion-textarea>
 
       <div class="save-button">
-        <ion-button expand = 'block' type = 'submit'>Guardar</ion-button>
+        <ion-button expand="block" type="submit">Guardar</ion-button>
       </div>
-
     </form>
   </div>
-
 </div>

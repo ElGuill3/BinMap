@@ -1,46 +1,98 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { IonAvatar, IonButton, IonLabel, IonInput, IonItem } from '@ionic/angular/standalone';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  FormsModule,
+} from '@angular/forms';
+import {
+  IonAvatar,
+  IonButton,
+  IonInput,
+  IonTextarea,
+} from '@ionic/angular/standalone';
 import { UserService, User } from 'src/app/services/user.service';
 import { Observable } from 'rxjs';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera'
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.page.html',
   styleUrls: ['./edit-user.page.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, IonAvatar, IonButton, IonLabel, IonInput, IonItem]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    IonAvatar,
+    IonButton,
+    IonInput,
+    IonTextarea,
+  ],
 })
 export class EditUserPage implements OnInit {
+  @ViewChild('input') input!: IonInput;
 
   form: FormGroup;
   user$: Observable<User>;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private location: Location) {
-    this.form = this.fb.group ({
+  ionViewDidEnter() {
+    setTimeout(() => {
+      this.input.setFocus();
+    }, 100);
+  }
+
+  onInputFilter(event: CustomEvent, controlName: 'name' | 'description') {
+    const value = (event.target as HTMLIonInputElement).value ?? '';
+
+    const patterns = {
+      name: /[^a-zA-ZÁÉÍÓÚáéíóúÑñ\s]+/g,
+      description: /[^a-zA-Z0-9ÁÉÍÓÚáéíóúÑñ\s.,¡!¿?()"'/-]+/g,
+    };
+
+    const filteredValue = (value as string).replace(patterns[controlName], '');
+
+    this.form.get(controlName)?.setValue(filteredValue);
+  }
+
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private location: Location
+  ) {
+    this.form = this.fb.group({
       name: [''],
       avatar: [''],
-      description: ['']
+      description: [''],
     });
 
     this.user$ = this.userService.getUser();
   }
 
   ngOnInit(): void {
-    this.user$.subscribe(user => {
-    this.form.patchValue(user);
+    this.user$.subscribe((user) => {
+      this.form.patchValue(user);
     });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
   save(): void {
     const updatedUser = this.form.value;
-    this.userService.setUser(updatedUser).subscribe(data => {
+    this.userService.setUser(updatedUser).subscribe((data) => {
       console.log('Usuario Actualizado', data);
-      this.location.back();
-    
-    })
+    });
+  }
+
+  formSubmit(): void {
+    if (this.form.invalid) {
+      return;
+    }
+    this.save();
+    this.goBack();
   }
 
   async openCamera(): Promise<void> {
@@ -55,11 +107,10 @@ export class EditUserPage implements OnInit {
       const base64Image = image.dataUrl;
 
       this.form.patchValue({
-        avatar: base64Image
+        avatar: base64Image,
       });
     } catch (error) {
       console.error('Error al tomar la foto: ', error);
     }
   }
-
 }

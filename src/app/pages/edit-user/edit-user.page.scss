@@ -1,43 +1,67 @@
 :host {
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
 .user-info {
-    padding: 0 1rem;
+  padding: 0 1rem;
 }
 
 .user-info .user-avatar {
-    padding-top: 8rem;
-    display: grid;
-    text-align: center;
+  padding-top: 8rem;
+  display: grid;
+  text-align: center;
 
-    ion-avatar {
-        margin: 0 auto;
-        width: 8rem;
-        height: 8rem;
-    }
+  ion-avatar {
+    margin: 0 auto;
+    width: 8rem;
+    height: 8rem;
+  }
 }
 
 .button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
 
-    ion-button {
-        --background: #0D4550;
-    }
+  ion-button {
+    --background: #0d4550;
+  }
 }
 
 .user-edit-info {
-    margin: 2rem 0;
+  margin: 2rem 0;
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+}
+
+ion-input {
+  --border-width: 0.15em;
+  --highlight-color-focused: #0d4550;
+  --highlight-color-invalid: #ff0000;
+  --highlight-color-valid: #0d4550;
+}
+
+ion-textarea {
+  --border-width: 0.15em;
+  --highlight-color-focused: #0d4550;
+  --highlight-color-valid: #0d4550;
+  --padding-top: 1rem;
+  --padding-bottom: 1rem;
+}
+
+.description-input {
+  height: 15vh;
 }
 
 .save-button {
-    margin: 2rem 0;
-    display: flex;
-    justify-content: center;
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
 
-    ion-button {
-        --background: #0D4550;
-    }
+  ion-button {
+    --background: #0d4550;
+  }
 }

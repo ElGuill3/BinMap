@@ -19,12 +19,17 @@
 }
 
 .user-info .description {
-    margin-top: 3vh;
+    margin-top: 1vh;
     background-color: #fff;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     text-align: justify;
     padding: 0.1rem 1.5rem;
+}
+
+.default-text {
+    color: #888;
+    font-style: italic;
 }
 
 .button-container {

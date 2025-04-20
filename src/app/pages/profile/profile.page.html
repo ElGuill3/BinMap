@@ -7,9 +7,14 @@
     <h2>{{ user.name }}</h2>
   </div>
   
+  <h3>Sobre Mi</h3>
   <div class="description">
-    <h3>Sobre Mi</h3>
-    <p>{{ user.description }}</p>
+    <p *ngIf = "user.description; else noDescription"
+    >{{ user.description }}</p>
+
+    <ng-template #noDescription>
+      <p class="default-text">Escribe un poco sobre ti...</p>
+    </ng-template>
   </div>
 
 </div>

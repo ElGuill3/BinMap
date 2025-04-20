@@ -17,8 +17,13 @@ ion-toolbar {
     display: flex;
 }
 
-ion-back-button {
-    --margin-start: 0.5em;
-    --icon-font-size: 2.5em;
-    --transition: 0.3s;
+ion-button {
+    --transition: 0.9s;
+
+    mat-icon {
+        font-size: 3em;
+        width: 10vw;
+        max-width: 10vw;
+        height: auto;
+    }
 }

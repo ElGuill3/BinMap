@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd} from '@angular/router';
 import { Location } from '@angular/common';
 import { filter } from 'rxjs/operators';
-import { IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonAvatar, IonBackButton} from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonAvatar} from '@ionic/angular/standalone';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UserService, User } from 'src/app/services/user.service';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
   standalone: true,
-  imports: [IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonAvatar, IonBackButton, RouterModule, CommonModule],
+  imports: [IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonAvatar, RouterModule, CommonModule, MatIcon],
 })
 export class ToolbarComponent implements OnInit {
   currentRoute: string = '';
