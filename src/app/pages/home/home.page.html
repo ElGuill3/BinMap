@@ -1,8 +1,10 @@
 <ion-content [fullscreen]="true">
-  
   <div id="inicio-container">
-    <strong>Pagina principal de la aplicación</strong>
+    <app-poi-card
+      *ngFor="let poi of poiList"
+      [image]="poi.img"
+      [title]="poi.name"
+    >
+    </app-poi-card>
   </div>
-
 </ion-content>
-
