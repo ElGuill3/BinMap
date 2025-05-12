@@ -1,0 +1,41 @@
+<ion-content>
+
+  <div class="modal-header">
+    <h2>{{ title }}</h2>
+
+    <div class="buttons-container">
+      <button class="audio-button" (click)="toggleSpeech()">
+        <mat-icon [class.speaking] = "isSpeaking">volume_up</mat-icon>
+      </button>
+
+      <button class="favorites-button">
+        <mat-icon>favorite</mat-icon>
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="modal-info">
+      <p>{{ info }}</p>
+  </div>
+
+<div class="image-container">
+
+  <img [src]="image" alt="Imagen"/>
+
+  <button class="play-button" *ngIf="!showVideo" (click)="showVideo = true">
+    <mat-icon>play_arrow</mat-icon>
+  </button>
+
+  <video [src]="video"
+  *ngIf="showVideo"
+  class="video-player"
+  [src]="video"
+  autoplay
+  (ended)="onVideoEnded()"
+  ></video>
+
+</div>
+
+</ion-content>

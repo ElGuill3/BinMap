@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {
   IonCard,
   IonCardHeader,
@@ -13,10 +13,15 @@ import {
   imports: [IonCard, IonCardHeader, IonCardTitle],
 })
 export class PoiCardComponent implements OnInit {
-  @Input() image!: string;
   @Input() title!: string;
-
-  constructor() {}
+  @Input() info!: string;
+  @Input() image!: string;
+  @Input() video!: string;
+  @Output() cardClick = new EventEmitter<void>();
 
   ngOnInit() {}
+
+  onCardClick() {
+    this.cardClick.emit();
+  }
 }

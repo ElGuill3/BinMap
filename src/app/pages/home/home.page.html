@@ -2,9 +2,12 @@
   <div id="inicio-container">
     <app-poi-card
       *ngFor="let poi of poiList"
-      [image]="poi.img"
-      [title]="poi.name"
-    >
+      [title] = "poi.name"
+      [info] = "poi.description"
+      [image] = "poi.img"
+      [video] = "poi.video"
+      (cardClick) = "openModal(poi)"
+    > 
     </app-poi-card>
   </div>
 </ion-content>

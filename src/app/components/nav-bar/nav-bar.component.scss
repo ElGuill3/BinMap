@@ -5,6 +5,9 @@
 }
 
 ion-tab-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
     border: none;
     height: 9vh;
@@ -20,13 +23,24 @@ ion-tab-button {
     transition: all 0.3s ease;
 }
 
+ion-tab-button.map-tab {
+    --color: #DEC8A3;
+    --color-selected: #eab253;
+
+    mat-icon {
+        font-size: 3.2rem;
+        width: 3.2rem;
+        height: 3.2rem;
+    }
+}
+
 mat-icon {
-    font-size: 2.5rem;
-    width: 2.5rem;
-    height: 2.5rem;
+    font-size: 2.7rem;
+    width: 2.7rem;
+    height: 2.7rem;
 }
 
 ion-tab-button.tab-selected {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
