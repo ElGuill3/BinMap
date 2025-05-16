@@ -5,7 +5,8 @@ import { filter } from 'rxjs/operators';
 import { IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonAvatar} from '@ionic/angular/standalone';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { UserService, User } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user/user.service';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({

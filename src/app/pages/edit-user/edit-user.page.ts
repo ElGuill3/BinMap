@@ -12,7 +12,8 @@ import {
   IonInput,
   IonTextarea,
 } from '@ionic/angular/standalone';
-import { UserService, User } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user/user.service';
 import { Observable } from 'rxjs';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 

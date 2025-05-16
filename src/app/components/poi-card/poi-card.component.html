@@ -1,6 +1,20 @@
-<ion-card (click)="onCardClick()">
-  <img [src]="image" />
-  <ion-card-header>
-    <ion-card-title>{{ title }}</ion-card-title>
-  </ion-card-header>
-</ion-card>
+<div class="card-container">
+  <ion-card>
+    <button
+      *ngIf="showFavoriteButton"
+      class="favorite-button"
+      (click)="onFavoriteClick()"
+    >
+      <mat-icon [ngClass]="{ favorite: isFav, 'no-favorite': !isFav }"
+        >favorite</mat-icon
+      >
+    </button>
+    <img [src]="image" (click)="onCardClick()" />
+    <ion-card-header>
+      <ion-card-title>{{ title }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <div *ngIf="!showFavoriteButton" class="delete-button-container">
+    <button class="delete-button" (click)="onRemoveClick()">Eliminar</button>
+  </div>
+</div>

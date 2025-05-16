@@ -1,27 +1,22 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs' 
-
-export interface User {
-  name: string;
-  avatar: string;
-  description: string;
-}
+import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from 'src/app/models/user.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class UserService {
-
   private key = 'user';
 
   private userSubjet = new BehaviorSubject<User>(this.loadUser());
 
-  constructor() { }
+  constructor() {}
 
   private loadUser(): User {
     const userInfo = localStorage.getItem(this.key);
-    return userInfo ? JSON.parse(userInfo): { name: '', avatar: '', description: ''};
+    return userInfo
+      ? JSON.parse(userInfo)
+      : { name: '', avatar: '', description: '' };
   }
 
   getUser(): Observable<User> {

@@ -2,6 +2,7 @@
   <div id="inicio-container">
     <app-poi-card
       *ngFor="let poi of poiList"
+      [id] = "poi.id"
       [title] = "poi.name"
       [info] = "poi.description"
       [image] = "poi.img"

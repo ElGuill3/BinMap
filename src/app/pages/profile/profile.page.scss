@@ -1,43 +1,43 @@
 :host {
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
 .user-info {
-    padding: 0 1rem;
+  padding: 0 1rem;
 }
 
 .user-info .user-avatar {
-    padding-top: 8rem;
-    display: grid;
-    text-align: center;
+  padding-top: 8rem;
+  display: grid;
+  text-align: center;
 
-    ion-avatar {
-        margin: 0 auto;
-        width: 8rem;
-        height: 8rem;
-    }
+  ion-avatar {
+    margin: 0 auto;
+    width: 8rem;
+    height: 8rem;
+  }
 }
 
 .user-info .description {
-    margin-top: 1vh;
-    background-color: #fff;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    text-align: justify;
-    padding: 0.1rem 1.5rem;
+  margin-top: 1vh;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: justify;
+  padding: 0.1rem 1.5rem;
 }
 
 .default-text {
-    color: #888;
-    font-style: italic;
+  color: #888;
+  font-style: italic;
 }
 
 .button-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
 
-    ion-button {
-        --background: #0D4550;
-    }
+  ion-button {
+    --background: #0d4550;
+  }
 }

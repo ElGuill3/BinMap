@@ -1,26 +1,21 @@
 <div class="user-info">
-
   <div class="user-avatar">
     <ion-avatar>
       <img [src]="user.avatar || '../../../assets/icon/default-avatar.svg'" />
     </ion-avatar>
     <h2>{{ user.name }}</h2>
   </div>
-  
+
   <h3>Sobre Mi</h3>
   <div class="description">
-    <p *ngIf = "user.description; else noDescription"
-    >{{ user.description }}</p>
+    <p *ngIf="user.description; else noDescription">{{ user.description }}</p>
 
     <ng-template #noDescription>
       <p class="default-text">Escribe un poco sobre ti...</p>
     </ng-template>
   </div>
-
 </div>
 
 <div class="button-container">
-  <ion-button [routerLink] = "['/edit-user']" >
-    Editar Informacion
-  </ion-button>
+  <ion-button [routerLink]="['/edit-user']"> Editar Informacion </ion-button>
 </div>

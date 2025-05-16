@@ -1,5 +1,23 @@
-<ion-content [fullscreen]="true">
-  <div id="favoritos-container">
-    <strong>Pagina de favoritos de la aplicacion</strong>
+<ion-content fullscreen="true">
+  <h2>Mis Favoritos</h2>
+  <div id="favorites-container" *ngIf="favorites.length > 0; else noFavs">
+    <app-poi-card 
+    *ngFor="let poi of favorites"
+    [id]="poi.id"
+    [title]="poi.name"
+    [info]="poi.description"
+    [image]="poi.img"
+    [video]="poi.video"
+    (cardClick)="openModal(poi)"
+    [showFavoriteButton]="false"
+    (remove)="onRemove($event)"
+    >
+    </app-poi-card>
+
+    
   </div>
+
+  <ng-template #noFavs>
+    <p>No has agregado favoritos todavía.</p>
+  </ng-template>
 </ion-content>
