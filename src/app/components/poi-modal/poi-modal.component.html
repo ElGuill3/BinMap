@@ -8,8 +8,8 @@
         <mat-icon [class.speaking] = "isSpeaking">volume_up</mat-icon>
       </button>
 
-      <button class="favorites-button">
-        <mat-icon>favorite</mat-icon>
+      <button class="favorites-button" (click)="onFavoriteClick()">
+        <mat-icon [ngClass]="{ favorite: isFav, 'no-favorite': !isFav }">favorite</mat-icon>
       </button>
 
     </div>

@@ -18,9 +18,9 @@ import { Subscription } from 'rxjs';
 })
 export class PoiCardComponent implements OnInit {
 
-  @Input() id!: number;
   isFav = false;
-
+  private favSubscription!: Subscription;
+  @Input() id!: number;
   @Input() title!: string;
   @Input() info!: string;
   @Input() image!: string;
@@ -29,14 +29,12 @@ export class PoiCardComponent implements OnInit {
   @Output() cardClick = new EventEmitter<void>();
   @Output() remove = new EventEmitter<number>();
 
-  private favSubscription!: Subscription;
-
   constructor(private favoriteService: FavoritesService) {}
 
   ngOnInit() {
     this.favSubscription = this.favoriteService.getFavorites().subscribe(favs => {
       this.isFav = favs.includes(this.id);
-    })
+    });
   }
 
   ngOnDestroy() {

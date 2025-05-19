@@ -1,113 +1,125 @@
 @font-face {
-    font-family: 'SansPro';
-    src: url('../../../assets/fonts/SourceSansPro-Regular.otf');
-    font-display: swap;
+  font-family: "SansPro";
+  src: url("../../../assets/fonts/SourceSansPro-Regular.otf");
+  font-display: swap;
 }
 
 .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1.5em 0 1.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5em 0 1.5em;
 }
 
 .modal-header h2 {
-    font-family: 'SansPro';
-    font-size: 2rem;
-    font-weight: bold;
-    color: #424242;
+  font-family: "SansPro";
+  font-size: 2rem;
+  font-weight: bold;
+  color: #424242;
 }
 
 .buttons-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .audio-button {
-    background-color: transparent;
-    padding: 0.5em 0.5em 0.5em 0.5em;
-    border-radius: 50%;
-    padding-right: 1em;
+  background-color: transparent;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  border-radius: 50%;
+  padding-right: 1em;
 
-    mat-icon {
+  mat-icon {
     font-size: 2.5rem;
     width: 2.5rem;
     height: 2.5rem;
     color: #c8c8c8;
     transition: color 0.3s ease;
-    }
+  }
 
-    mat-icon.speaking {
-        color: #09BE82;
-        animation: pulse 1s infinite ease-in-out;
-    }
+  mat-icon.speaking {
+    color: #09be82;
+    animation: pulse 1s infinite ease-in-out;
+  }
 }
 
 .favorites-button {
-    background-color: transparent;;
+  background-color: transparent;
+}
+
+.favorite {
+  background: linear-gradient(to right, #ffdb70, #d6a206);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.no-favorite {
+  color: #c8c8c8 !important;
 }
 
 .favorites-button mat-icon {
-    font-size: 2.5rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    color: #c8c8c8;
+  font-size: 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #c8c8c8;
 }
 
 .modal-info {
-    padding: 0 1.5em 0 1.5em;
+  padding: 0 1.5em 0 1.5em;
 }
 
 .modal-info p {
-    font-family: 'SansPro';
-    font-size: 1.1rem;
-    text-align: justify;
-    color: #424242;
+  font-family: "SansPro";
+  font-size: 1.1rem;
+  text-align: justify;
+  color: #424242;
 }
 
 .image-container {
-    position: relative;
-    text-align: center;
-    width: 100%;
-    margin-bottom: 1rem;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
 img {
-    display: block;
-    margin: 0 auto;
-    width: 75%;
-    height: 25vh;
-    object-fit: cover;
-    border-radius: 0.5em;
+  display: block;
+  margin: 0 auto;
+  width: 75%;
+  height: 25vh;
+  object-fit: cover;
+  border-radius: 0.5em;
 }
 
 .play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-    background-color: rgba(255,255,255);
-    color: red;
-    border: none;
-    border-radius: 50%;
-    padding: 0.4em 0.6em;
-    cursor: pointer;
-    z-index: 10;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  background-color: rgba(255, 255, 255);
+  color: red;
+  border: none;
+  border-radius: 50%;
+  padding: 0.4em 0.6em;
+  cursor: pointer;
+  z-index: 10;
 }
 
 .video-player {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 75%;
-    height: 25vh;
-    object-fit: cover;
-    z-index: 9;
-    border-radius: 0.5em;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 75%;
+  height: 25vh;
+  object-fit: cover;
+  z-index: 9;
+  border-radius: 0.5em;
 }
 
 @keyframes pulse {

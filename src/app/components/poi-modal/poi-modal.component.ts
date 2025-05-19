@@ -3,6 +3,8 @@ import { IonContent } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { TextToSpeech } from '@capacitor-community/text-to-speech';
+import { FavoritesService } from 'src/app/services/favorites/favorites.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-poi-modal',
@@ -12,6 +14,7 @@ import { TextToSpeech } from '@capacitor-community/text-to-speech';
   imports: [IonContent, CommonModule, MatIcon],
 })
 export class PoiModalComponent implements OnInit, OnDestroy {
+  @Input() id!: number;
   @Input() title!: string;
   @Input() info!: string;
   @Input() image!: string;
@@ -19,10 +22,22 @@ export class PoiModalComponent implements OnInit, OnDestroy {
 
   isSpeaking = false;
   showVideo = false;
+  isFav = false;
+  private favSubscription!: Subscription;
 
-  constructor() {}
+  constructor(private favoriteService: FavoritesService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.favSubscription = this.favoriteService
+      .getFavorites()
+      .subscribe((favs) => {
+        this.isFav = favs.includes(this.id);
+      });
+  }
+
+  onFavoriteClick() {
+    this.favoriteService.toggleFavorite(this.id);
+  }
 
   onVideoEnded() {
     this.showVideo = false;
@@ -47,7 +62,10 @@ export class PoiModalComponent implements OnInit, OnDestroy {
     }
   }
 
-ngOnDestroy(): void {
-  TextToSpeech.stop();
-}
+  ngOnDestroy(): void {
+    TextToSpeech.stop();
+    if (this.favSubscription) {
+      this.favSubscription.unsubscribe();
+    }
+  }
 }

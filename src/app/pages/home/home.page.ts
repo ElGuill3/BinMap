@@ -30,6 +30,7 @@ export class HomePage {
     const modal = await this.modalCtrl.create({
       component: PoiModalComponent,
       componentProps: {
+        id: poi.id,
         title: poi.name,
         info: poi.description,
         image: poi.img,
