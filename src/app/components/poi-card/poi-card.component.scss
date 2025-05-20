@@ -23,6 +23,7 @@ ion-card {
 
   mat-icon {
     transition: color 0.2s ease;
+    color: #fff;
   }
 }
 
@@ -61,12 +62,41 @@ ion-card-title {
   color: #424242;
 }
 
-.delete-button-container {
-  padding: 0.5em;
+.favorite-info-container {
+  margin-bottom: 0.5em;
   display: flex;
-  justify-content: flex-end;
-  padding-bottom: 1em;
-  padding-left: 1em;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.4em;
+  padding: 0.5em 0 0.5em 1em;
+}
+
+.visit-date-container p,
+.is-visited-container p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.is-visited-container {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  padding: 0.2em 0.4em;
+}
+
+.visited-button {
+  background-color: transparent;
+  mat-icon {
+    color: #e0e0e0;
+  }
+}
+
+.visited {
+  color: #059FAE !important;
+}
+
+.not-visited {
+  color: #e0e0e0 !important;
 }
 
 .delete-button {

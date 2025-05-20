@@ -1,20 +1,35 @@
-<div class="card-container">
-  <ion-card>
-    <button
-      *ngIf="showFavoriteButton"
-      class="favorite-button"
-      (click)="onFavoriteClick()"
-    >
-      <mat-icon [ngClass]="{ favorite: isFav, 'no-favorite': !isFav }"
-        >favorite</mat-icon
+<div class="card-wrapper">
+  <div class="card-container">
+    <ion-card>
+      <button
+        *ngIf="isFavoritePage"
+        class="favorite-button"
+        (click)="onFavoriteClick()"
       >
-    </button>
-    <img [src]="image" (click)="onCardClick()" />
-    <ion-card-header>
-      <ion-card-title>{{ title }}</ion-card-title>
-    </ion-card-header>
-  </ion-card>
-  <div *ngIf="!showFavoriteButton" class="delete-button-container">
-    <button class="delete-button" (click)="onRemoveClick()">Eliminar</button>
+        <mat-icon [ngClass]="{ favorite: isFav, 'no-favorite': !isFav }"
+          >favorite</mat-icon
+        >
+      </button>
+      <img [src]="image" (click)="onCardClick()" />
+      <ion-card-header>
+        <ion-card-title>{{ title }}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+    <div *ngIf="!isFavoritePage" class="favorite-info-container">
+      <div class="visit-date-container">
+        <p>Fecha de visita:</p>
+        <p>{{ visitDate | date : "dd/MM/yyyy" }}</p>
+      </div>
+      <div class="is-visited-container">
+        <button class="visited-button" (click)="onVisitedClick()">
+          <mat-icon
+            [ngClass]="{ visited: isVisited, 'not-visited': !isVisited }"
+            >{{ isVisited ? "hourglass_bottom" : "hourglass_top" }}</mat-icon
+          >
+        </button>
+        <p>{{ isVisited ? "Visitado" : "Pendiente" }}</p>
+      </div>
+      <button class="delete-button" (click)="onRemoveClick()">Eliminar</button>
+    </div>
   </div>
 </div>

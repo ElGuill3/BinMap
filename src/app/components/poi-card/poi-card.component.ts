@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { FavoritesService } from 'src/app/services/favorites/favorites.service';
 import { Subscription } from 'rxjs';
+import { VisitedService } from 'src/app/services/visited/visited.service';
 
 @Component({
   selector: 'app-poi-card',
@@ -19,22 +20,28 @@ import { Subscription } from 'rxjs';
 export class PoiCardComponent implements OnInit {
 
   isFav = false;
+  isVisited = false;
   private favSubscription!: Subscription;
+  private visitedSubscription!: Subscription;
   @Input() id!: number;
   @Input() title!: string;
   @Input() info!: string;
   @Input() image!: string;
   @Input() video!: string;
-  @Input() showFavoriteButton: boolean = true;
+  @Input() visitDate!: Date;
+  @Input() isFavoritePage: boolean = true;
   @Output() cardClick = new EventEmitter<void>();
   @Output() remove = new EventEmitter<number>();
 
-  constructor(private favoriteService: FavoritesService) {}
+  constructor(private favoriteService: FavoritesService, private visitedService: VisitedService) {}
 
   ngOnInit() {
     this.favSubscription = this.favoriteService.getFavorites().subscribe(favs => {
       this.isFav = favs.includes(this.id);
     });
+    this.visitedSubscription = this.visitedService.getVisited().subscribe(visited => {
+      this.isVisited = visited.includes(this.id);
+    })
   }
 
   ngOnDestroy() {
@@ -55,5 +62,7 @@ export class PoiCardComponent implements OnInit {
     this.remove.emit(this.id);
   }
 
-  
+  onVisitedClick() {
+    this.visitedService.toggleVisited(this.id);
+  }
 }
