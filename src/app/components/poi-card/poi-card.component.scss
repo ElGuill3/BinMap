@@ -71,6 +71,12 @@ ion-card-title {
   padding: 0.5em 0 0.5em 1em;
 }
 
+.visit-date-container {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
 .visit-date-container p,
 .is-visited-container p {
   margin: 0;
@@ -101,6 +107,7 @@ ion-card-title {
 
 .delete-button {
   max-height: 2em;
+  max-width: 6em;
   background-color: #d9534f;
   color: #fff;
   border: none;

@@ -21,6 +21,7 @@ export class PoiCardComponent implements OnInit {
 
   isFav = false;
   isVisited = false;
+  visitDate: Date | null = null
   private favSubscription!: Subscription;
   private visitedSubscription!: Subscription;
   @Input() id!: number;
@@ -28,7 +29,6 @@ export class PoiCardComponent implements OnInit {
   @Input() info!: string;
   @Input() image!: string;
   @Input() video!: string;
-  @Input() visitDate!: Date;
   @Input() isFavoritePage: boolean = true;
   @Output() cardClick = new EventEmitter<void>();
   @Output() remove = new EventEmitter<number>();
@@ -64,5 +64,11 @@ export class PoiCardComponent implements OnInit {
 
   onVisitedClick() {
     this.visitedService.toggleVisited(this.id);
+    if (this.isVisited) {
+      this.visitDate = new Date();
+    }
+    else {
+      this.visitDate = null;
+    }
   }
 }
