@@ -24,6 +24,7 @@ export class PoiCardComponent implements OnInit {
   visitDate: Date | null = null
   private favSubscription!: Subscription;
   private visitedSubscription!: Subscription;
+  private visitDatesSubscription!: Subscription;
   @Input() id!: number;
   @Input() title!: string;
   @Input() info!: string;
@@ -41,12 +42,22 @@ export class PoiCardComponent implements OnInit {
     });
     this.visitedSubscription = this.visitedService.getVisited().subscribe(visited => {
       this.isVisited = visited.includes(this.id);
-    })
+
+      if (this.isVisited) {
+        this.visitDate = this.visitedService.getVisitDateById(this.id);
+      } else {
+        this.visitDate = null;
+      }
+    });
+
   }
 
   ngOnDestroy() {
     if (this.favSubscription) {
       this.favSubscription.unsubscribe();
+    }
+    if (this.visitedSubscription) {
+      this.visitedSubscription.unsubscribe();
     }
   }
 
@@ -63,11 +74,13 @@ export class PoiCardComponent implements OnInit {
   }
 
   onVisitedClick() {
-    this.visitedService.toggleVisited(this.id);
-    if (this.isVisited) {
-      this.visitDate = new Date();
-    }
-    else {
+    const now = new Date();
+
+    if (!this.isVisited) {
+      this.visitedService.addVisited(this.id, now);
+      this.visitDate = now;
+    } else {
+      this.visitedService.removeVisited(this.id);
       this.visitDate = null;
     }
   }

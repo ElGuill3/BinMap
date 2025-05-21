@@ -1,5 +1,15 @@
+ion-content {
+  h2 {
+    margin-top: 10vh;
+    margin-left: 5vw;
+  }
+
+  p {
+    margin-left: 5vw;
+  }
+}
+
 #favorites-container {
-  padding-top: 5vh !important;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
