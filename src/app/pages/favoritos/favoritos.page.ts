@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IonContent, ModalController } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { PoiService } from 'src/app/services/poi/poi.service';
@@ -15,7 +15,7 @@ import { PoiModalComponent } from 'src/app/components/poi-modal/poi-modal.compon
   standalone: true,
   imports: [IonContent, PoiCardComponent, CommonModule],
 })
-export class FavoritosPage implements OnInit {
+export class FavoritosPage implements OnInit, OnDestroy {
   favorites: Poi[] = [];
   private subscription!: Subscription;
 
@@ -26,12 +26,13 @@ export class FavoritosPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    const Pois = this.poiService.getAll();
-
     this.subscription = this.favoriteService
       .getFavorites()
-      .subscribe((favIds) => {
-        this.favorites = Pois.filter((poi) => favIds.includes(poi.id));
+      .subscribe(async (favIds) => {
+        const allPois = await this.poiService.getAll().toPromise();
+        if (allPois) {
+          this.favorites = allPois.filter((poi) => favIds.includes(poi.id));
+        }
       });
   }
 
@@ -41,7 +42,7 @@ export class FavoritosPage implements OnInit {
       componentProps: {
         title: poi.name,
         info: poi.description,
-        image: poi.img,
+        image: poi.image,
         video: poi.video,
       },
       initialBreakpoint: 0.75,
@@ -55,7 +56,7 @@ export class FavoritosPage implements OnInit {
     this.subscription?.unsubscribe();
   }
 
-  onRemove(id: number) {
+  onRemove(id: string) {
     this.favoriteService.removeFavorite(id);
   }
 }

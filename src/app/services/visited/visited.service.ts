@@ -10,8 +10,8 @@ const VISITED_DATES_KEY = 'visitedDates';
 })
 export class VisitedService {
 
-  private visitedList = new BehaviorSubject<number[]>(this.loadVisited().ids);
-  private visitDates = new BehaviorSubject<Record<number, string>>(this.loadVisited().dates);
+  private visitedList = new BehaviorSubject<string[]>(this.loadVisited().ids);
+  private visitDates = new BehaviorSubject<Record<string, string>>(this.loadVisited().dates);
 
   constructor() { }
 
@@ -24,7 +24,7 @@ export class VisitedService {
     };
   }
 
-  private saveVisited(ids: number[], dates: Record<number, string>) {
+  private saveVisited(ids: string[], dates: Record<string, string>) {
     localStorage.setItem(VISITED_KEY, JSON.stringify(ids));
     localStorage.setItem(VISITED_DATES_KEY, JSON.stringify(dates));
     this.visitedList.next(ids);
@@ -39,16 +39,16 @@ export class VisitedService {
     return this.visitDates.asObservable();
   }
 
-  getVisitDateById(id: number): Date | null {
+  getVisitDateById(id: string): Date | null {
     const dates = this.loadVisited().dates;
     return dates[id] ? new Date(dates[id]) : null;
   }
 
-  isVisited(id: number): boolean {
+  isVisited(id: string): boolean {
     return this.loadVisited().ids.includes(id);
   }
 
-  addVisited(id: number, date = new Date()) {
+  addVisited(id: string, date = new Date()) {
     const visitInfo = this.loadVisited();
     if (!visitInfo.ids.includes(id)) {
       const newIds = [...visitInfo.ids, id];
@@ -57,7 +57,7 @@ export class VisitedService {
     }
   }
 
-  removeVisited(id: number) {
+  removeVisited(id: string) {
     const visitInfo = this.loadVisited();
     const newIds = visitInfo.ids.filter(visitedId => visitedId !== id);
     const newDates = { ...visitInfo.dates };
@@ -65,7 +65,7 @@ export class VisitedService {
     this.saveVisited(newIds, newDates);
   }
 
-  toggleVisited(id: number) {
+  toggleVisited(id: string) {
     if (this.isVisited(id)) {
       this.removeVisited(id);
     } else {

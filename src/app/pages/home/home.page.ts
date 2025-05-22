@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalController, IonContent } from '@ionic/angular/standalone';
 import { PoiCardComponent } from '../../components/poi-card/poi-card.component';
@@ -13,7 +13,7 @@ import { Poi } from 'src/app/models/poi.model';
   standalone: true,
   imports: [IonContent, PoiCardComponent, CommonModule],
 })
-export class HomePage {
+export class HomePage implements OnInit {
   
   poiList: Poi[] = [];
 
@@ -23,7 +23,9 @@ export class HomePage {
   ) {}
 
   ngOnInit() {
-    this.poiList = this.poiService.getAll();
+    this.poiService.getAll().subscribe(pois => {
+      this.poiList = pois;
+    });
   }
 
   async openModal(poi: Poi){
@@ -33,7 +35,7 @@ export class HomePage {
         id: poi.id,
         title: poi.name,
         info: poi.description,
-        image: poi.img,
+        image: poi.image,
         video: poi.video
       },
       initialBreakpoint: 0.75,

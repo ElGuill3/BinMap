@@ -8,16 +8,16 @@ const FAVORITE_KEY = 'poiFavorite';
 })
 export class FavoritesService {
 
-  private favoriteList = new BehaviorSubject<number[]>(this.loadFavorites());
+  private favoriteList = new BehaviorSubject<string[]>(this.loadFavorites());
   
   constructor() { }
 
-  private loadFavorites(): number[] {
+  private loadFavorites(): string[] {
     const stored = localStorage.getItem(FAVORITE_KEY)
     return stored ? JSON.parse(stored) : [];
   }
 
-  private saveFavorites(favorites: number[]) {
+  private saveFavorites(favorites: string[]) {
     
     localStorage.setItem(FAVORITE_KEY, JSON.stringify(favorites));
     this.favoriteList.next(favorites);
@@ -28,23 +28,23 @@ export class FavoritesService {
     return this.favoriteList.asObservable();
   }
 
-  isFavorite(id: number): boolean {
+  isFavorite(id: string): boolean {
     return this.loadFavorites().includes(id);
   }
 
-  addFavorite(id: number) {
+  addFavorite(id: string) {
     const current = this.loadFavorites();
     if (!current.includes(id)) {
       this.saveFavorites([...current, id]);
     }
   }
 
-  removeFavorite(id:number) {
+  removeFavorite(id: string) {
     const current = this.loadFavorites();
     this.saveFavorites(current.filter(favId => favId !== id));
   }
 
-  toggleFavorite(id: number) {
+  toggleFavorite(id: string) {
     this.isFavorite(id) ? this.removeFavorite(id) : this.addFavorite(id);
   }
 }

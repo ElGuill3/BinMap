@@ -1,4 +1,4 @@
 export interface VisitInfo {
-    ids: number[];
-    dates: Record<number, string>;
+    ids: string[];
+    dates: Record<string, string>;
   }

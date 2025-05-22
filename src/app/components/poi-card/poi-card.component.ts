@@ -25,14 +25,14 @@ export class PoiCardComponent implements OnInit {
   private favSubscription!: Subscription;
   private visitedSubscription!: Subscription;
   private visitDatesSubscription!: Subscription;
-  @Input() id!: number;
+  @Input() id!: string;
   @Input() title!: string;
   @Input() info!: string;
   @Input() image!: string;
   @Input() video!: string;
   @Input() isFavoritePage: boolean = true;
   @Output() cardClick = new EventEmitter<void>();
-  @Output() remove = new EventEmitter<number>();
+  @Output() remove = new EventEmitter<string>();
 
   constructor(private favoriteService: FavoritesService, private visitedService: VisitedService) {}
 

@@ -125,7 +125,7 @@ export class ApiService {
     return this.getData<T>('/places/', params);
   }
 
-  getPlaceById<T>(id: number): Observable<T> {
+  getPlaceById<T>(id: string): Observable<T> {
     return this.getData<T>(`/places/${id}/`);
   }
 
@@ -133,11 +133,11 @@ export class ApiService {
     return this.getData<T>('/favorites/');
   }
 
-  addFavorite<T>(placeId: number): Observable<T> {
+  addFavorite<T>(placeId: string): Observable<T> {
     return this.postData<T>('/favorites/', { place_id: placeId });
   }
 
-  removeFavorite<T>(favoriteId: number): Observable<T> {
+  removeFavorite<T>(favoriteId: string): Observable<T> {
     return this.deleteData<T>(`/favorites/${favoriteId}/`);
   }
 
@@ -145,7 +145,7 @@ export class ApiService {
     return this.getData<T>('/routes/', params);
   }
 
-  getRouteById<T>(id: number): Observable<T> {
+  getRouteById<T>(id: string): Observable<T> {
     return this.getData<T>(`/routes/${id}/`);
   }
 

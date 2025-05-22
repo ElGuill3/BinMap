@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
   imports: [IonContent, CommonModule, MatIcon],
 })
 export class PoiModalComponent implements OnInit, OnDestroy {
-  @Input() id!: number;
+  @Input() id!: string;
   @Input() title!: string;
   @Input() info!: string;
   @Input() image!: string;
