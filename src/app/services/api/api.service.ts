@@ -77,8 +77,8 @@ export class ApiService {
     });
   }
 
-  login<T>(username: string, password: string): Observable<T> {
-    return this.postData<T>('/auth/login/', { username, password });
+  login<T>(email: string, password: string): Observable<T> {
+    return this.postData<T>('/auth/login/', { email, password });
   }
 
   logout<T>(): Observable<T> {
