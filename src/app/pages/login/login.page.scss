@@ -1,0 +1,104 @@
+.login-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+
+  ion-item {
+    margin-bottom: 16px;
+    --background: transparent;
+    margin: 70px;
+
+    &.item-has-focus {
+      --border-color: var(--ion-color-primary);
+      --background: #ffffff;
+    }
+  }
+
+  .error-messages {
+    margin-top: -12px;
+    margin-bottom: 16px;
+    padding-left: 16px;
+
+    ion-text {
+      display: block;
+      margin-bottom: 4px;
+    }
+  }
+
+  .password-strength {
+    margin-top: -12px;
+    margin-bottom: 16px;
+    padding: 0 16px;
+
+    ion-text {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    ion-progress-bar {
+      height: 4px;
+      --progress-background: var(--ion-color-light);
+    }
+  }
+
+  ion-button[type="submit"] {
+    margin-top: 24px;
+    height: 48px;
+    font-weight: 600;
+    --border-radius: 8px;
+
+    &:disabled {
+      opacity: 0.6;
+    }
+
+    ion-spinner {
+      margin-right: 8px;
+    }
+  }
+
+  // Estilos para el botón de mostrar/ocultar contraseña
+  ion-button[fill="clear"] {
+    --color: var(--ion-color-medium);
+    
+    &:hover {
+      --color: var(--ion-color-primary);
+    }
+  }
+}
+
+// Animaciones para las validaciones
+.error-messages {
+  animation: slideInUp 0.3s ease-out;
+}
+
+.password-strength {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Responsive design
+@media (max-width: 480px) {
+  .login-form {
+    padding: 16px;
+  }
+}
