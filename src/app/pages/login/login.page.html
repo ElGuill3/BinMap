@@ -1,0 +1,81 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <!-- Contenido visible -->
+  <div class="login-form">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Campo Email -->
+      <ion-item>
+        <ion-label position="floating">Correo</ion-label>
+        <ion-input 
+          type="email" 
+          formControlName="email"
+          placeholder="ejemplo@correo.com">
+        </ion-input>
+      </ion-item>
+      
+      <!-- Mensajes de error para email -->
+      <div class="error-messages" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+        <ion-text color="danger" *ngIf="email?.errors?.['required']">
+          <small>El correo electrónico es requerido</small>
+        </ion-text>
+        <ion-text color="danger" *ngIf="email?.errors?.['email']">
+          <small>Por favor ingresa un correo electrónico válido</small>
+        </ion-text>
+        <ion-text color="danger" *ngIf="email?.errors?.['pattern']">
+          <small>El formato del correo no es válido</small>
+        </ion-text>
+      </div>
+
+      <!-- Campo Contraseña -->
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input 
+          [type]="showPassword ? 'text' : 'password'" 
+          formControlName="password">
+        </ion-input>
+        <ion-button 
+          fill="clear" 
+          slot="end" 
+          (click)="togglePasswordVisibility()">
+          <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+        </ion-button>
+      </ion-item>
+      
+      <!-- Mensajes de error para contraseña -->
+      <div class="error-messages" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+        <ion-text color="danger" *ngIf="password?.errors?.['required']">
+          <small>La contraseña es requerida</small>
+        </ion-text>
+        <ion-text color="danger" *ngIf="password?.errors?.['minlength']">
+          <small>La contraseña debe tener al menos 8 caracteres</small>
+        </ion-text>
+        <ion-text color="danger" *ngIf="password?.errors?.['pattern']">
+          <small>La contraseña debe contener al menos: 1 mayúscula, 1 minúscula, 1 número y 1 carácter especial</small>
+        </ion-text>
+      </div>
+
+      <!-- Indicador de fortaleza de contraseña -->
+      <div class="password-strength" *ngIf="password?.value">
+        <ion-text [color]="getPasswordStrengthColor()">
+          <small>Fortaleza: {{ getPasswordStrengthText() }}</small>
+        </ion-text>
+        <ion-progress-bar 
+          [value]="getPasswordStrengthValue()" 
+          [color]="getPasswordStrengthColor()">
+        </ion-progress-bar>
+      </div>
+
+      <!-- Botón de iniciar sesión -->
+      <ion-button 
+        expand="block" 
+        class="ion-margin-top" 
+        type="submit"
+        [disabled]="loginForm.invalid || isLoading">
+        <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
+        {{ isLoading ? 'Iniciando...' : 'Iniciar sesión' }}
+      </ion-button>
+    </form>
+  </div>
+
+</ion-content>
