@@ -3,7 +3,7 @@
     <ion-avatar>
       <img [src]="user.avatar || '../../../assets/icon/default-avatar.svg'" />
     </ion-avatar>
-    <h2>{{ user.name }}</h2>
+    <h2>{{ user.first_name }} {{ user.last_name }}</h2>
   </div>
 
   <h3>Sobre Mi</h3>
@@ -17,5 +17,6 @@
 </div>
 
 <div class="button-container">
-  <ion-button [routerLink]="['/edit-user']"> Editar Informacion </ion-button>
+  <ion-button [routerLink]="['/edit-user']" type="button">Editar Información</ion-button>
+  <ion-button color="danger" (click)="logout()" type="button">Cerrar Sesión</ion-button>
 </div>

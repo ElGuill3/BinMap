@@ -1,9 +1,12 @@
 <ion-content [fullscreen]="true" class="ion-padding">
-
-  <!-- Contenido visible -->
   <div class="login-form">
+    <div class="logo-section">
+      <ion-icon name="person-outline" size="large"></ion-icon>
+      <h1>Iniciar Sesión</h1>
+      <p>Ingresa tus credenciales para continuar</p>
+    </div>
+
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      
       <!-- Campo Email -->
       <ion-item>
         <ion-label position="floating">Correo</ion-label>
@@ -50,21 +53,12 @@
         <ion-text color="danger" *ngIf="password?.errors?.['minlength']">
           <small>La contraseña debe tener al menos 8 caracteres</small>
         </ion-text>
-        <ion-text color="danger" *ngIf="password?.errors?.['pattern']">
-          <small>La contraseña debe contener al menos: 1 mayúscula, 1 minúscula, 1 número y 1 carácter especial</small>
-        </ion-text>
       </div>
 
-      <!-- Indicador de fortaleza de contraseña -->
-      <div class="password-strength" *ngIf="password?.value">
-        <ion-text [color]="getPasswordStrengthColor()">
-          <small>Fortaleza: {{ getPasswordStrengthText() }}</small>
-        </ion-text>
-        <ion-progress-bar 
-          [value]="getPasswordStrengthValue()" 
-          [color]="getPasswordStrengthColor()">
-        </ion-progress-bar>
-      </div>
+      <!-- Checkbox Recordarme -->
+      <ion-item lines="none">
+        <ion-checkbox formControlName="rememberMe">Recordarme</ion-checkbox>
+      </ion-item>
 
       <!-- Botón de iniciar sesión -->
       <ion-button 
@@ -76,6 +70,10 @@
         {{ isLoading ? 'Iniciando...' : 'Iniciar sesión' }}
       </ion-button>
     </form>
-  </div>
 
+    <!-- Enlace a registro -->
+    <div class="register-link">
+      <p>¿No tienes cuenta? <a [routerLink]="['/register']">Regístrate aquí</a></p>
+    </div>
+  </div>
 </ion-content>

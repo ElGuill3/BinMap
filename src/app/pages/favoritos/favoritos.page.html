@@ -1,4 +1,8 @@
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
   <h2>Mis Favoritos</h2>
   <div id="favorites-container" *ngIf="favorites.length > 0; else noFavs">
     <app-poi-card 

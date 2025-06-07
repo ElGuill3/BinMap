@@ -12,27 +12,41 @@
   </div>
 
   <div class="user-edit-info">
-    <form [formGroup]="form" (ngSubmit)="formSubmit()">
+    <form [formGroup]="form">
       <h2>Nombre</h2>
-
       <ion-input
-        (ionInput)="onInputFilter($event, 'name')"
+        (ionInput)="onInputFilter($event, 'first_name')"
+        (keydown.enter)="$event.preventDefault()"
         counter="50"
         maxlength="50"
-        formControlName="name"
+        formControlName="first_name"
         fill="outline"
         autofocus="true"
         placeholder="Ingresa tu nombre"
         required="true"
         errorText="El nombre es muy corto"
         #input
-        #nameFilter
+      >
+      </ion-input>
+
+      <h2>Apellido</h2>
+      <ion-input
+        (ionInput)="onInputFilter($event, 'last_name')"
+        (keydown.enter)="$event.preventDefault()"
+        counter="50"
+        maxlength="50"
+        formControlName="last_name"
+        fill="outline"
+        placeholder="Ingresa tu apellido"
+        required="true"
+        errorText="El apellido es muy corto"
       >
       </ion-input>
 
       <h2>Sobre mi</h2>
       <ion-textarea
         (ionInput)="onInputFilter($event, 'description')"
+        (keydown.enter)="$event.preventDefault()"
         counter="300"
         maxlength="300"
         formControlName="description"
@@ -42,7 +56,7 @@
       ></ion-textarea>
 
       <div class="save-button">
-        <ion-button expand="block" type="submit">Guardar</ion-button>
+        <ion-button expand="block" (click)="formSubmit()" type="button" [disabled]="form.disabled">Guardar</ion-button>
       </div>
     </form>
   </div>

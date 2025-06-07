@@ -1,14 +1,20 @@
-<ion-content [fullscreen]="true">
-  <div id="inicio-container">
-    <app-poi-card
-      *ngFor="let poi of poiList"
-      [id] = "poi.id"
-      [title] = "poi.name"
-      [info] = "poi.description"
-      [image] = "poi.image"
-      [video] = "poi.video"
-      (cardClick) = "openModal(poi)"
-    > 
-    </app-poi-card>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="home-container">
+    <h1>Puntos de Interés</h1>
+    <div class="poi-grid">
+      <app-poi-card
+        *ngFor="let poi of poiList"
+        [id]="poi.id"
+        [title]="poi.name"
+        [info]="poi.description"
+        [image]="poi.image"
+        [video]="poi.video"
+        (cardClick)="openModal(poi)"
+      ></app-poi-card>
+    </div>
   </div>
 </ion-content>

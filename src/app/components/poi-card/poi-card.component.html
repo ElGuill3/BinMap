@@ -4,7 +4,9 @@
       <button
         *ngIf="isFavoritePage"
         class="favorite-button"
-        (click)="onFavoriteClick()"
+        (click)="onFavoriteClick($event)"
+        [disabled]="isProcessingFavorite"
+        [class.processing]="isProcessingFavorite"
       >
         <mat-icon [ngClass]="{ favorite: isFav, 'no-favorite': !isFav }"
           >favorite</mat-icon
@@ -21,7 +23,10 @@
         <p>{{ visitDate | date : "dd/MM/yyyy" }}</p>
       </div>
       <div class="is-visited-container">
-        <button class="visited-button" (click)="onVisitedClick()">
+        <button class="visited-button" 
+                (click)="onVisitedClick($event)"
+                [disabled]="isProcessingVisit"
+                [class.processing]="isProcessingVisit">
           <mat-icon
             [ngClass]="{ visited: isVisited, 'not-visited': !isVisited }"
             >{{ isVisited ? "hourglass_bottom" : "hourglass_top" }}</mat-icon
@@ -29,7 +34,7 @@
         </button>
         <p>{{ isVisited ? "Visitado" : "Pendiente" }}</p>
       </div>
-      <button class="delete-button" (click)="onRemoveClick()">Eliminar</button>
+      <button class="delete-button" (click)="onRemoveClick($event)">Eliminar</button>
     </div>
   </div>
 </div>

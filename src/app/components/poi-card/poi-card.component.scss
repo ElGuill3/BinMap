@@ -20,10 +20,30 @@ ion-card {
   margin-left: 33vw;
   background-color: transparent;
   z-index: 10;
+  border: none;
+  cursor: pointer;
+  
+  &.processing {
+    opacity: 0.6;
+    cursor: not-allowed;
+    animation: pulse 1.5s infinite;
+  }
 
   mat-icon {
     transition: color 0.2s ease;
     color: #fff;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
@@ -92,6 +112,15 @@ ion-card-title {
 
 .visited-button {
   background-color: transparent;
+  border: none;
+  cursor: pointer;
+  
+  &.processing {
+    opacity: 0.6;
+    cursor: not-allowed;
+    animation: pulse 1.5s infinite;
+  }
+  
   mat-icon {
     color: #e0e0e0;
   }

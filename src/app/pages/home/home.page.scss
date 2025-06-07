@@ -2,6 +2,26 @@ ion-content {
   padding-top: 20% !important;
 }
 
+.home-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2vh;
+  margin-top: 2vh;
+}
+
+.home-container h1 {
+  font-size: 1.8rem;
+  color: #424242;
+  margin-bottom: 2vh;
+}
+
+.poi-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2vh;
+}
+
 #inicio-container {
   padding-top: 20% !important;
   display: flex;

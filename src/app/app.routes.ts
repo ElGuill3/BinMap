@@ -1,15 +1,25 @@
 import { Routes } from '@angular/router';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'tabs/home',
+    redirectTo: 'login',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login.page').then(m => m.LoginPage)
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('./pages/register/register.page').then(m => m.RegisterPage)
   },
   {
     path: 'tabs',
     component: NavBarComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'home',
@@ -35,19 +45,16 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
-    loadComponent: () => import('./pages/profile/profile.page').then( m => m.ProfilePage)
+    loadComponent: () => import('./pages/profile/profile.page').then(m => m.ProfilePage),
+    canActivate: [AuthGuard]
   },
   {
     path: 'edit-user',
-    loadComponent: () => import('./pages/edit-user/edit-user.page').then( m => m.EditUserPage)
+    loadComponent: () => import('./pages/edit-user/edit-user.page').then(m => m.EditUserPage),
+    canActivate: [AuthGuard]
   },
   {
-    path: 'login',
-    loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage)
-  },  {
-    path: 'register',
-    loadComponent: () => import('./pages/register/register.page').then( m => m.RegisterPage)
-  },
-
-
+    path: '**',
+    redirectTo: 'login'
+  }
 ];

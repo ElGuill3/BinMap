@@ -1,14 +1,43 @@
-#rutas-container {
-    text-align: center;
-  
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+ion-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.route-card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6em 2.5em 0 2.5em;
+}
+
+.route-container {
+  margin-bottom: 1.5em;
+  padding: 1.2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #DEC8A3;
+  border-radius: 1em;
+  text-align: justify;
+
+  h2 {
+    color: #292929;
+    margin: 0 0 0.5em 0;
+    font-size: 1.4em;
   }
-  
-  #rutas-container strong {
-    font-size: 20px;
-    line-height: 26px;
+
+  p {
+    color: #292929;
+    margin: 0 0 0.5em 0;
+    line-height: 1.4;
   }
+
+  .route-duration {
+    font-weight: 550;
+    margin-top: 0.5em;
+  }
+}

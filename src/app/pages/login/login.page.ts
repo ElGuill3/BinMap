@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { AlertController, LoadingController, ToastController, IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
+import { Login } from '../../models/login.model';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +14,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    IonicModule
+    IonicModule,
+    RouterModule
   ]
 })
 export class LoginPage implements OnInit {
@@ -28,7 +32,9 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private alertController: AlertController,
     private loadingController: LoadingController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -44,9 +50,9 @@ export class LoginPage implements OnInit {
       ]],
       password: ['', [
         Validators.required,
-        Validators.minLength(8),
-        Validators.pattern(this.passwordPattern)
-      ]]
+        Validators.minLength(8)
+      ]],
+      rememberMe: [false]
     });
   }
 
@@ -99,25 +105,48 @@ export class LoginPage implements OnInit {
   async onSubmit(): Promise<void> {
     if (this.loginForm.valid) {
       this.isLoading = true;
-      
+      const loading = await this.loadingController.create({
+        message: 'Iniciando sesión...'
+      });
+      await loading.present();
+
       try {
-        const formData = this.loginForm.value;
-        console.log('Datos del formulario:', formData);
+        const credentials: Login = this.loginForm.value;
+        console.log('Intentando iniciar sesión con:', credentials.email);
         
-        // Aquí iría tu lógica de autenticación
-        // Por ejemplo: await this.authService.login(formData.email, formData.password);
-        
-        // Simulación de petición (remover en producción)
-        await this.simulateLogin();
-        
-        await this.showSuccessToast('¡Inicio de sesión exitoso!');
-        
-        // Redirigir al usuario después del login exitoso
-        // this.router.navigate(['/home']);
-        
+        this.authService.login(credentials).subscribe({
+          next: (response) => {
+            console.log('Login exitoso:', response);
+            this.showSuccessToast('¡Inicio de sesión exitoso!');
+            this.router.navigate(['/tabs/home']);
+            loading.dismiss();
+            this.isLoading = false;
+          },
+          error: (error) => {
+            console.error('Error en login:', error);
+            let errorMsg = 'Credenciales inválidas. Por favor intenta de nuevo.';
+            
+            if (error.status === 0) {
+              errorMsg = 'No se pudo conectar al servidor. Verifica tu conexión a internet y que el servidor esté funcionando.';
+            } else if (error.error) {
+              if (error.error.non_field_errors) {
+                errorMsg = error.error.non_field_errors[0];
+              } else if (error.error.detail) {
+                errorMsg = error.error.detail;
+              } else if (error.message) {
+                errorMsg = error.message;
+              }
+            }
+            
+            this.showErrorAlert('Error de autenticación', errorMsg);
+            loading.dismiss();
+            this.isLoading = false;
+          }
+        });
       } catch (error) {
-        await this.showErrorAlert('Error de autenticación', 'Credenciales inválidas. Por favor intenta de nuevo.');
-      } finally {
+        console.error('Error inesperado:', error);
+        this.showErrorAlert('Error inesperado', 'Ocurrió un error al procesar tu solicitud. Por favor intenta de nuevo.');
+        loading.dismiss();
         this.isLoading = false;
       }
     } else {
@@ -137,7 +166,6 @@ export class LoginPage implements OnInit {
     if (this.password?.errors) {
       if (this.password.errors['required']) errors.push('La contraseña es requerida');
       if (this.password.errors['minlength']) errors.push('La contraseña debe tener al menos 8 caracteres');
-      if (this.password.errors['pattern']) errors.push('La contraseña debe contener mayúsculas, minúsculas, números y caracteres especiales');
     }
 
     if (errors.length > 0) {
@@ -168,22 +196,5 @@ export class LoginPage implements OnInit {
       buttons: ['OK']
     });
     await alert.present();
-  }
-
-  // Simulación de login (remover en producción)
-  private simulateLogin(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        // Simular éxito o fallo basado en criterios
-        const email = this.email?.value;
-        const password = this.password?.value;
-        
-        if (email === 'test@example.com' && password === 'Test123!') {
-          resolve();
-        } else {
-          reject(new Error('Credenciales inválidas'));
-        }
-      }, 2000);
-    });
   }
 }

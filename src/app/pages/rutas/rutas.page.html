@@ -1,5 +1,13 @@
 <ion-content [fullscreen]="true">
-  <div id="rutas-container">
-    <strong>Pagina de las rutas de la app</strong>
+  <div class="route-card-container">
+    <div
+      class="route-container"
+      *ngFor="let route of routes"
+      (click)="openModal(route)"
+    >
+      <h2>{{ route.name }}</h2>
+      <p>{{ route.description }}</p>
+      <p class="route-duration">Duración: {{ route.duration }}</p>
+    </div>
   </div>
 </ion-content>
