@@ -41,7 +41,8 @@ export class RutasPage implements OnInit {
       component: PoiModalComponent,
       componentProps: {
         route: route,
-        pois: routePois
+        pois: routePois,
+        isRouteContext: true
       },
       initialBreakpoint: 0.75,
       breakpoints: [0, 0.75],

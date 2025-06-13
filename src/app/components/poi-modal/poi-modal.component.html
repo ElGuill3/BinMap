@@ -1,6 +1,6 @@
 <ion-content>
-  <div class="modal-header">
-    <h2>{{ route ? route.name : title }}</h2>
+  <div class="modal-header" [ngClass]="displayMode">
+    <h2>{{ isRouteContext ? route?.name : title }}</h2>
 
     <div class="buttons-container">
       <button class="audio-button" (click)="toggleSpeech()">
@@ -9,7 +9,7 @@
 
       <button 
         class="favorites-button" 
-        *ngIf="id" 
+        *ngIf="id && !isRouteContext" 
         (click)="toggleFavorite()"
         [disabled]="isProcessingFavorite"
         [class.processing]="isProcessingFavorite"
@@ -19,7 +19,7 @@
       
       <button 
         class="visited-button" 
-        *ngIf="id" 
+        *ngIf="id && !isRouteContext" 
         (click)="onVisitedClick($event)"
         [disabled]="isProcessingVisit"
         [class.processing]="isProcessingVisit"
@@ -28,20 +28,25 @@
           {{ isVisited ? "hourglass_bottom" : "hourglass_top" }}
         </mat-icon>
       </button>
+      
+      <!-- Botón de cierre solo en modo popup -->
+      <button *ngIf="displayMode === 'popup'" class="modal-close" (click)="dismiss()">
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
   </div>
 
   <div class="modal-info">
-    <div *ngIf="route">
+    <div *ngIf="isRouteContext && route">
       <p>{{ route.description }}</p>
       <p class="route-duration">Duración: {{ route.duration }}</p>
     </div>
-    <p *ngIf="!route">{{ info }}</p>
+    <p *ngIf="!isRouteContext">{{ info }}</p>
   </div>
 
   <hr>
 
-  <div *ngIf="route && pois" class="pois-container">
+  <div *ngIf="isRouteContext && route && pois" class="pois-container">
     <h3>Puntos de Interés</h3>
     <div class="poi-list">
       <div *ngFor="let poi of pois" class="poi-item">
@@ -56,7 +61,7 @@
     </div>
   </div>
 
-  <div class="image-container" *ngIf="image">
+  <div class="image-container" *ngIf="!isRouteContext && image">
     <img [src]="image" alt="Imagen"/>
 
     <button class="play-button" *ngIf="!showVideo && video" (click)="showVideo = true">

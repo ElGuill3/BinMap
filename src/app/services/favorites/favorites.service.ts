@@ -61,7 +61,7 @@ export class FavoritesService {
         } else {
           console.error('Formato de respuesta desconocido:', response);
           return [];
-        }
+  }
       }),
       finalize(() => {
         this.isLoading = false;
@@ -217,7 +217,7 @@ export class FavoritesService {
           this.favoriteMap.set(responseId, response.id.toString());
           if (!currentFavorites.includes(responseId)) {
             this.favoriteList.next([...currentFavorites, responseId]);
-          }
+    }
           
           // Mostrar un mensaje de éxito
           this.showToast('Lugar añadido a favoritos');

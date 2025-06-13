@@ -84,7 +84,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.isLoading = true;
     this.poiService.getAll().subscribe({
       next: pois => {
-        this.poiList = pois;
+      this.poiList = pois;
         this.isLoading = false;
       },
       error: error => {
@@ -116,23 +116,23 @@ export class HomePage implements OnInit, OnDestroy {
     try {
       console.log('Intentando abrir modal para POI:', poi);
       
-      const modal = await this.modalCtrl.create({
-        component: PoiModalComponent,
-        componentProps: {
-          id: poi.id,
-          title: poi.name,
-          info: poi.description,
-          image: poi.image,
-          video: poi.video
-        },
+    const modal = await this.modalCtrl.create({
+      component: PoiModalComponent,
+      componentProps: {
+        id: poi.id,
+        title: poi.name,
+        info: poi.description,
+        image: poi.image,
+        video: poi.video
+      },
         cssClass: 'poi-modal',
-        initialBreakpoint: 0.75,
-        breakpoints: [0, 0.75],
-        handleBehavior: 'cycle',
+      initialBreakpoint: 0.75,
+      breakpoints: [0, 0.75],
+      handleBehavior: 'cycle',
       });
-      
+
       console.log('Modal creado, presentando...');
-      await modal.present();
+    await modal.present();
       
       console.log('Modal presentado, esperando cierre...');
       const { data } = await modal.onDidDismiss();

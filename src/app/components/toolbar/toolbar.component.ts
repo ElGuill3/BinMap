@@ -25,7 +25,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   showToolbar: boolean = true;
   title: string = 'BinMap';
   user: User = {first_name: '', last_name: '', email: '', avatar: '', description: ''};
-  
+
   private routerSubscription?: Subscription;
   private userSubscription?: Subscription;
   private authSubscription?: Subscription;
@@ -45,11 +45,11 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         this.currentRoute = event.urlAfterRedirects;
         this.updateToolbarState();
       });
-    
+      
     // Suscripción a cambios en el usuario
     this.userSubscription = this.userService.getUser().subscribe(user => {
-      this.user = user;
-    });
+        this.user = user;
+      });
 
     // Suscripción al estado de autenticación
     this.authSubscription = this.authService.isAuthenticated$.subscribe(isAuthenticated => {
@@ -76,18 +76,18 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     // Actualizar título y botón de retroceso
     if (this.currentRoute.includes('/profile')) {
-      this.title = 'Perfil';
-      this.showBackButton = true;
-    } else if (this.currentRoute.includes('/edit-user')) {
-      this.title = 'Editar Información';
-      this.showBackButton = true;
-    } else if (this.currentRoute.includes('/settings')) {
-      this.title = 'Configuración';
-      this.showBackButton = true;
-    } else {
-      this.title = 'BinMap';
-      this.showBackButton = false;
-    }
+          this.title = 'Perfil';
+          this.showBackButton = true;
+        } else if (this.currentRoute.includes('/edit-user')) {
+          this.title = 'Editar Información';
+          this.showBackButton = true;
+        } else if (this.currentRoute.includes('/settings')) {
+          this.title = 'Configuración';
+          this.showBackButton = true;
+        } else {
+          this.title = 'BinMap';
+          this.showBackButton = false;
+        }
   }
 
   goBack() {

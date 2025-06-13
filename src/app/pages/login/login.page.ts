@@ -118,7 +118,7 @@ export class LoginPage implements OnInit {
           next: (response) => {
             console.log('Login exitoso:', response);
             this.showSuccessToast('¡Inicio de sesión exitoso!');
-            this.router.navigate(['/tabs/home']);
+        this.router.navigate(['/tabs/home']);
             loading.dismiss();
             this.isLoading = false;
           },

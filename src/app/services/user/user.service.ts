@@ -91,18 +91,18 @@ export class UserService {
       return this.getUser();
     }
 
-    const localUser = { avatar: user.avatar, description: user.description };
-    localStorage.setItem(this.getLocalKey(user.email), JSON.stringify(localUser));
+      const localUser = { avatar: user.avatar, description: user.description };
+      localStorage.setItem(this.getLocalKey(user.email), JSON.stringify(localUser));
 
-    if (user.first_name || user.last_name) {
-      return this.updateUserName(user.first_name, user.last_name).pipe(
-        switchMap(() => {
+      if (user.first_name || user.last_name) {
+        return this.updateUserName(user.first_name, user.last_name).pipe(
+          switchMap(() => {
           const updatedUser = this.loadUser();
           this.updateCurrentUser(updatedUser);
-          return this.getUser();
-        })
-      );
-    }
+            return this.getUser();
+          })
+        );
+      }
 
     const updatedUser = this.loadUser();
     this.updateCurrentUser(updatedUser);

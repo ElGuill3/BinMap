@@ -63,7 +63,7 @@ export class EditUserPage implements OnInit, OnDestroy {
     };
 
     const filteredValue = (value as string).replace(patterns[controlName], '');
-    
+
     if (this.isInitialLoad) return;
     
     this.form.get(controlName)?.setValue(filteredValue, { emitEvent: true });

@@ -69,7 +69,7 @@ export class ApiService {
   postData<T>(endpoint: string, data: any, headers?: HttpHeaders): Observable<T> {
     const options = {
       headers: headers || this.getAuthHeaders(),
-      withCredentials: true
+      withCredentials: true 
     };
     
     console.log(`POST: ${this.baseApiPath}${endpoint}`, data);
@@ -84,7 +84,7 @@ export class ApiService {
   putData<T>(endpoint: string, data: any, headers?: HttpHeaders): Observable<T> {
     const options = {
       headers: headers || this.getAuthHeaders(),
-      withCredentials: true
+      withCredentials: true 
     };
     
     console.log(`PUT: ${this.baseApiPath}${endpoint}`, data);
@@ -99,7 +99,7 @@ export class ApiService {
   patchData<T>(endpoint: string, data: any, headers?: HttpHeaders): Observable<T> {
     const options = {
       headers: headers || this.getAuthHeaders(),
-      withCredentials: true
+      withCredentials: true 
     };
     
     console.log(`PATCH: ${this.baseApiPath}${endpoint}`, data);
@@ -114,7 +114,7 @@ export class ApiService {
   deleteData<T>(endpoint: string, headers?: HttpHeaders): Observable<T> {
     const options = {
       headers: headers || this.getAuthHeaders(),
-      withCredentials: true
+      withCredentials: true 
     };
     
     console.log(`DELETE: ${this.baseApiPath}${endpoint}`);
@@ -262,7 +262,7 @@ export class ApiService {
                 if (response && response.results && response.results.length > 0) {
                   console.log('Favorito encontrado después del error:', response.results[0]);
                   return response.results[0] as T;
-                }
+  }
                 throw error; // Si no existe, propagamos el error original
               }),
               catchError(() => {

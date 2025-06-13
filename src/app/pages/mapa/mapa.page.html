@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true">
   <div class="map-container">
-    <app-leaflet-map></app-leaflet-map>
+    <app-leaflet-map [pois]="pois" (poiClicked)="abrirPoiModal($event)"></app-leaflet-map>
   </div>
 </ion-content>

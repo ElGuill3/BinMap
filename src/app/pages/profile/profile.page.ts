@@ -50,7 +50,7 @@ export class ProfilePage implements OnInit, OnDestroy {
     // Crear nueva suscripción
     this.userSubscription = this.userService.getUser().subscribe({
       next: (user) => {
-        this.user = user;
+      this.user = user;
       },
       error: (error) => {
         console.error('Error al cargar datos del usuario:', error);

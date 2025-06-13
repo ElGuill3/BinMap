@@ -1,1 +1,20 @@
 <div id="mapId" style="height: 100%; width: 100%"></div>
+
+<ng-container *ngIf="showPoiPopup && selectedPoi">
+  <div 
+    style="position: absolute; z-index: 1000;"
+    [style.left.px]="popupPosition.x"
+    [style.top.px]="popupPosition.y"
+  >
+    <app-poi-modal
+      [id]="selectedPoi.id"
+      [title]="selectedPoi.name"
+      [info]="selectedPoi.description"
+      [image]="selectedPoi.image"
+      [video]="selectedPoi.video"
+      [route]="selectedPoi.route"
+      [displayMode]="'popup'"
+      [onPopupClose]="closePoiPopup.bind(this)"
+    ></app-poi-modal>
+  </div>
+</ng-container>

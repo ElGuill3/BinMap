@@ -27,6 +27,9 @@ export class PoiModalComponent implements OnInit, OnDestroy {
   @Input() video?: string;
   @Input() route?: Route;
   @Input() pois?: Poi[];
+  @Input() displayMode: 'modal' | 'popup' = 'modal';
+  @Input() onPopupClose?: () => void;
+  @Input() isRouteContext: boolean = false;
 
   isSpeaking = false;
   showVideo = false;
@@ -99,7 +102,7 @@ export class PoiModalComponent implements OnInit, OnDestroy {
           console.log('Usuario autenticado, actualizando estado de favoritos y visitas');
           // No es necesario hacer nada más, ya que los servicios se actualizarán automáticamente
         }
-      });
+        });
     }
   }
 
@@ -170,7 +173,7 @@ export class PoiModalComponent implements OnInit, OnDestroy {
       this.isSpeaking = false;
     } else {
       this.isSpeaking = true;
-      const textToSpeak = this.info || this.route?.description || '';
+      const textToSpeak = this.isRouteContext ? this.route?.description || '' : this.info || '';
 
       await TextToSpeech.speak({
         text: textToSpeak,
@@ -199,9 +202,11 @@ export class PoiModalComponent implements OnInit, OnDestroy {
   }
   
   dismiss(refresh: boolean = false) {
-    console.log('Cerrando modal, refresh:', refresh);
-    this.modalCtrl.dismiss({
-      refresh: refresh
-    });
+    console.log('Cerrando modal/popup, refresh:', refresh);
+    if (this.displayMode === 'modal') {
+      this.modalCtrl.dismiss({ refresh: refresh });
+    } else if (this.displayMode === 'popup' && this.onPopupClose) {
+      this.onPopupClose();
+    }
   }
 }
